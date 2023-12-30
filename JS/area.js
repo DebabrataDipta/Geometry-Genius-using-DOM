@@ -13,6 +13,7 @@ function calculateRectangleArea(){
     const length = getElementById('rectangle-length');
     if(isNaN(width) || isNaN(length)){
         alert('Please enter a number');
+        return;
     }
     const newAreaValue = width * length;
     setValueToText('Rectangle-Area', newAreaValue);
@@ -25,6 +26,8 @@ function calculateParallelogramArea(){
     }
     const newAreaValue = base * height;
     setValueToText('Parallelogram-Area', newAreaValue);
+    // add to calculation entry 
+    addToCalculationEntry('Parallelogram', newAreaValue);
 }
 function calculateRhombusArea(){
     const distance1 = getElementById('Rhombus-distance1');
@@ -52,4 +55,17 @@ function calculateEllipseArea(){
     }
     const newAreaValue =3.1416 * input1 * input2;
     setValueToText('Ellipse-Area', newAreaValue);
+
+    addToCalculationEntry('Ellipse', newAreaValue);
+}
+// add to calculation entry 
+function addToCalculationEntry(areaType, area){
+    console.log(areaType+ ' '+ area);
+    const calculationEntry = document.getElementById('calculation-entry');
+
+    const count = calculationEntry.childElementCount;
+
+    const p = document.createElement('p');
+    p.innerHTML = `${count + 1}. ${areaType} ${area}  cm<sup>2</sup> <button class="btn text-white btn-success">Convert</button>`;
+    calculationEntry.appendChild(p);
 }
